@@ -1,0 +1,51 @@
+government = republic
+add_government_reform = almohad_commune_reform
+government_rank = 2
+technology_group = muslim
+religion = yazidi
+primary_culture = moroccan
+capital = 336
+1444.10.10= {
+	monarch = {
+		name = "Alvalad Imir ibn Saleninid"
+		adm = 5
+		dip = 5
+		mil = 3
+		birth_date = 1424.3.19
+	}
+	add_ruler_personality = inspiring_leader_personality
+}
+1444.11.10= {
+	add_truce_with = ARA
+	add_truce_with = CAS
+	add_truce_with = VAL
+	add_truce_with = TUN
+	add_truce_with = POR
+	add_truce_with = LON
+	add_truce_with = TEU
+	add_truce_with = ALG
+	add_disaster_progress = {
+		disaster = granada_succession_war
+		value = 100
+	}
+	add_country_modifier = {
+		name = moroccan_war_enthusiasm
+		duration = 3650
+	}
+	add_country_modifier = {
+		name = suddenpacifism
+		duration = 3650
+	}
+	add_treasury = 200
+	add_manpower = 8
+	declare_war_with_cb = {
+		who = MOR
+		casus_belli = cb_morroco_civil_war
+	}
+	declare_war_with_cb = {
+		who = Y30
+		casus_belli = cb_morroco_civil_war
+	}
+	add_accepted_culture = berber
+	add_accepted_culture = algerian
+}

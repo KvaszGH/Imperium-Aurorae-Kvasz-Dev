@@ -1,0 +1,60 @@
+government = monarchy
+add_government_reform = wattasid_sultanate
+government_rank = 2
+technology_group = muslim
+religion = yazidi
+primary_culture = moroccan
+capital = 4564
+1444.10.10= {
+	monarch = {
+		name = "Yahya"
+		dynasty = "Wattasid"
+		adm = 5
+		dip = 3
+		mil = 5
+		birth_date = 1384.3.19
+	}
+	add_ruler_personality = strict_personality
+	heir = {
+		name = "Yusuf"
+		dynasty = "Wattasid"
+		religion = hellenic_pagan_reformed
+		block_disinherit = yes
+		adm = 2
+		dip = 6
+		mil = 6
+		birth_date = 1421.1.21
+		death_date = 1496.1.21
+		claim = 100
+	}
+	add_heir_personality = free_thinker_personality
+}
+1444.11.10= {
+	add_truce_with = ARA
+	add_truce_with = CAS
+	add_truce_with = VAL
+	add_truce_with = TUN
+	add_truce_with = POR
+	add_truce_with = LON
+	add_truce_with = TEU
+	add_truce_with = ALG
+	add_disaster_progress = {
+		disaster = granada_succession_war
+		value = 100
+	}
+	add_country_modifier = {
+		name = moroccan_war_enthusiasm
+		duration = 3650
+	}
+	add_country_modifier = {
+		name = suddenpacifism
+		duration = 3650
+	}
+	add_legitimacy = -50
+	add_treasury = 200
+	add_manpower = 8
+	declare_war_with_cb = {
+		who = MOR
+		casus_belli = cb_morroco_civil_war
+	}
+}

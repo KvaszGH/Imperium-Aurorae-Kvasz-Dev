@@ -1,0 +1,843 @@
+estate_church_papal_emissary = {
+	icon = privilege_send_emissary_to_pope
+	max_absolutism = -5
+	loyalty = 0.05
+	influence = 0.05
+	is_valid = {
+		OR = {
+			religion = catholic
+			religion = fraticelli
+		}
+		NOT = { tag = PAP }
+		NOT = { tag = FAP }
+	}
+	can_select = {
+		papal_influence = 20
+		num_of_cardinals = 1
+	}
+	on_granted = {
+		add_papal_influence = -5
+	}
+	penalties = {
+		curia_powers_cost = 0.05
+	}
+	benefits = {
+		papal_influence = 1
+	}
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			factor = 0
+			is_part_of_hre = yes
+			is_emperor = no
+		}
+		modifier = {
+			factor = 0.25
+			OR = {
+				tag = SWE
+				tag = ENG
+				tag = GBR
+			}
+		}
+		modifier = {
+			factor = 0
+			is_absolutism_active = yes
+		}
+		modifier = {
+			factor = 0.75
+			religion = catholic
+			NOT = {
+				reverse_has_opinion = {
+					who = PAP
+					value = 50
+				}
+			}
+		}
+		modifier = {
+			factor = 0.75
+			religion = fraticelli
+			NOT = {
+				reverse_has_opinion = {
+					who = FAP
+					value = 50
+				}
+			}
+		}
+	}
+}
+
+estate_church_for_the_faith = {
+	icon = privilege_recruit_inouisitor
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	is_valid = {
+		OR = {
+			has_dlc = "Emperor"
+			has_dlc = "Lions of the North"
+		}
+		OR = {
+			has_country_flag = improved_expansionist_zealotry
+			any_known_country = {
+				NOT = { religion = root }
+			}
+			has_country_modifier = recently_force_converted_protagonist_timer
+			has_country_modifier = recently_annexed_other_religion_timer
+		}
+		NOT = { has_estate_privilege = estate_peasants_for_the_faith }
+	}
+	can_select = {
+		OR = {
+			has_country_flag = improved_expansionist_zealotry
+			any_known_country = {
+				NOT = { religion = root }
+			}
+		}
+		NOT = { has_estate_privilege = estate_church_inwards_perfection }
+	}
+	on_granted = {
+		if = {
+			limit = { has_government_attribute = free_expansionist_zealotry }
+			custom_tooltip = estate_church_for_the_faith_effect_tooltip_a
+		}
+		else = {
+			custom_tooltip = estate_church_for_the_faith_effect_tooltip
+		}
+	}
+	on_revoked = {
+		if = {
+			limit = { has_government_attribute = free_expansionist_zealotry }
+			custom_tooltip = estate_church_for_the_faith_effect_tooltip_a
+		}
+		else = {
+			custom_tooltip = estate_church_for_the_faith_effect_tooltip
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			any_known_country = {
+				NOT = { religion = root }
+				war_with = root
+			}
+			NOT = { has_country_flag = improved_expansionist_zealotry }
+		}
+		modifier = {
+			church_loyalty_modifier = 0.1
+			land_morale = 0.05
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			any_known_country = {
+				NOT = { religion = root }
+				war_with = root
+			}
+			has_country_flag = improved_expansionist_zealotry
+		}
+		modifier = {
+			church_loyalty_modifier = 0.1
+			land_morale = 0.15
+			war_exhaustion = -0.05
+			max_absolutism = 5
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			NOT = {
+				any_known_country = {
+					NOT = { religion = root }
+					OR = {
+						war_with = root
+						truce_with = root
+					}
+				}
+			}
+			NOT = { has_country_modifier = recently_force_converted_protagonist_timer }
+			NOT = { has_country_modifier = recently_annexed_other_religion_timer }
+			NOT = { has_country_flag = improved_expansionist_zealotry }
+			NOT = { has_government_attribute = free_expansionist_zealotry }
+		}
+		modifier = {
+			church_loyalty_modifier = -0.1
+			land_morale = -0.05
+		}
+		is_bad = yes
+	}
+	conditional_modifier = {
+		trigger = {
+			has_government_attribute = free_expansionist_zealotry
+		}
+		modifier = {
+			max_absolutism = 5
+		}
+	}
+	penalties = {
+	}
+	conditional_modifier = {
+		trigger = { has_government_mechanic = russian_modernization_mechanic }
+		modifier = { monthly_russian_modernization = -0.03 }
+	}
+	ai_will_do = {
+		factor = 1000
+		modifier = {
+			factor = 0
+			NOT = {
+				religion = protestant
+			}
+			NOT = { at_war_with_religious_enemy = yes }
+		}
+	}
+}
+
+estate_church_clerical_ministers = {
+	icon = privilege_recruit_minister
+	max_absolutism = -5
+	influence = 0.10
+	is_valid = {
+		NOT = { religion_group = pagan }
+		NOT = { religion = hellenic_pagan_reformed }
+		NOT = { religion = lollard }
+	}
+	conditional_modifier = {
+		trigger = {
+			if = {
+				limit = {
+					has_dlc = "Common Sense"
+				}
+				uses_church_aspects = no #Protestants/Anglicans/Cathars/Bogomilists
+				uses_karma = no #Buddhism/Vajrayana/Mahayana/Bon/Reformed Bon
+			}
+			if = {
+				limit = {
+					has_dlc = "Emperor"
+				}
+				NOT = { religion = hussite }
+			}
+			if = {
+				limit = {
+					has_dlc = "Origins"
+				}
+				NOT = { religion = jewish }
+			}
+			if = {
+				limit = {
+					has_dlc = "Wealth of Nations"
+				}
+				uses_fervor = no #Reformed/Messalian/Waldensian/Lollard/Qarmatian
+			}
+			if = {
+				limit = {
+					has_dlc = "Cradle of Civilization"
+				}
+				NOT = {
+					religion_group = muslim
+					NOT = { religion = qarmatian }
+					NOT = { religion = yazidi }
+				}
+			}
+			if = {
+				limit = {
+					has_dlc = "Mandate of Heaven"
+				}
+				NOT = { religion = confucianism }
+			}
+			if = {
+				limit = {
+					has_dlc = "Third Rome"
+				}
+				uses_patriarch_authority = no #Orthodox/Monothelite/Iconoclast/Paulician/Yazidi
+			}
+		}
+		modifier = {
+			missionary_maintenance_cost = -0.2
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			has_dlc = "Common Sense"
+			uses_karma = yes #Buddhism/Vajrayana/Mahayana/Bon/Reformed Bon
+		}
+		modifier = {
+			yearly_karma_decay = 0.005
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			has_dlc = "Common Sense"
+			uses_church_aspects = yes #Protetants/Anglicans/Cathars/Bogomilists
+		}
+		modifier = {
+			church_power_modifier = 0.1
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			has_dlc = "Emperor"
+			religion = hussite
+		}
+		modifier = {
+			church_power_modifier = 0.1
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			has_dlc = "Origins"
+			religion = jewish
+		}
+		modifier = {
+			church_power_modifier = 0.1
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			has_dlc = "Wealth of Nations"
+			uses_fervor = yes #Reformed/Messalian/Waldensian/Lollard/Qarmatian
+		}
+		modifier = {
+			monthly_fervor_increase = 0.5
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			has_dlc = "Cradle of Civilization"
+			religion_group = muslim
+			NOT = { religion = qarmatian }
+			NOT = { religion = yazidi }
+		}
+		modifier = {
+			monthly_piety = 0.001
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			has_dlc = "Mandate of Heaven"
+			religion = confucianism
+		}
+		modifier = {
+			yearly_harmony = 0.25
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			has_dlc = "Third Rome"
+			uses_patriarch_authority = yes #Orthodox/Monothelite/Iconoclast/Paulician/Yazidi
+		}
+		modifier = {
+			yearly_patriarch_authority = 0.005
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			rce_uses_religion_mechanic_manichaeism_purity = yes
+		}
+		modifier = {
+			rce_monthly_religion_mechanic_manichaeism_purity_change = 0.05
+		}
+	}
+	penalties = {
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			factor = 0.5
+			is_absolutism_active = yes
+		}
+		modifier = {
+			factor = 0.5
+			OR = {
+				religion = protestant
+				religion = anglican
+			}
+			religion = protestant
+			num_of_aspects = 3
+		}
+		modifier = {
+			factor = 10
+			religion = orthodox
+			has_dlc = "Third Rome"
+		}
+	}
+}
+
+estate_church_clerical_education = {
+	icon = privilege_technology
+	loyalty = 0.0
+	influence = 0.05
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	is_valid = {
+		has_dlc = "Domination"
+	}
+	can_select = {
+		if = {
+			limit = { has_estate = estate_brahmins }
+			NOT = { has_estate_privilege = estate_brahmins_clerical_education }
+		}
+		if = {
+			limit = { has_estate = estate_dhimmi }
+			NOT = { has_estate_privilege = estate_dhimmi_dhimmi_education }
+		}
+		if = {
+			limit = { has_estate = estate_alchemists }
+			NOT = { has_estate_privilege = estate_alchemists_public_education }
+		}
+		if = {
+			limit = { has_estate = estate_industrialists }
+			NOT = { has_estate_privilege = estate_industrialists_technocrat_education }
+		}
+	}
+	on_granted = {
+		scaling_with_influence_privilege_tooltip = {
+			estate_privilege = estate_church_clerical_education
+		}
+	}
+	on_revoked = {
+		scaling_with_influence_privilege_tooltip = {
+			estate_privilege = estate_church_clerical_education
+		}
+	}
+	influence_scaled_conditional_modifier = {	#Modifier that are applied if the specified conditions are true. At 100% Influence you gain 100% of the modifier.
+		trigger = {
+			NOT = {
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 30
+				}
+			}
+		}
+		modifier = {
+			reform_progress_growth = -0.25
+		}
+	}
+	influence_scaled_conditional_modifier = {	#Modifier that are applied if the specified conditions are true. At 100% Influence you gain 100% of the modifier.
+		trigger = {
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 30
+			}
+			NOT = {
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 60
+				}
+			}
+		}
+		modifier = {
+			reform_progress_growth = 0.1
+		}
+	}
+	influence_scaled_conditional_modifier = {	#Modifier that are applied if the specified conditions are true. At 100% Influence you gain 100% of the modifier.
+		trigger = {
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+		}
+		modifier = {
+			reform_progress_growth = 0.25
+		}
+	}
+	conditional_modifier = {
+		trigger = { has_government_mechanic = russian_modernization_mechanic }
+		modifier = { monthly_russian_modernization = -0.03 }
+	}
+	conditional_modifier = {
+		trigger = {
+			has_country_flag = dum_upgraded_clerical_education_flag
+		}
+		modifier = {
+			church_loyalty_modifier = 0.1
+			idea_cost = -0.1
+		}
+	}
+	ai_will_do = {
+		factor = 15
+		modifier = {
+			factor = 0
+			NOT = {
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 30
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				estate_influence = {
+					estate = estate_church
+					influence = 30
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			is_absolutism_active = yes
+		}
+		modifier = {
+			factor = 25
+			has_country_flag = dum_upgraded_clerical_education_flag
+		}
+	}
+}
+
+estate_dhimmi_guaranteed_autonomy = {
+	icon = privilege_grant_autonomy
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = 0.05
+	influence = 0.05
+	is_valid = {
+		any_owned_province = {
+			NOT = { religion_group = root }
+		}
+		NOT = { has_unlocked_estate_privilege = { estate_privilege = estate_dhimmi_guarantee_of_traditions } }
+	}
+	on_granted = {
+		custom_tooltip = estate_dhimmi_guaranteed_autonomy_effect_tooltip
+		hidden_effect = {
+			set_country_flag = dhimmi_tolerates_wrong_religion
+		}
+	}
+	on_granted_province = {
+		if = {
+			limit = {
+				NOT = { religion_group = root }
+			}
+			add_province_modifier = {
+				name = estate_dhimmi_guaranteed_autonomy_mod
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				has_province_modifier = estate_dhimmi_guaranteed_autonomy_mod
+			}
+			remove_province_modifier = estate_dhimmi_guaranteed_autonomy_mod
+		}
+	}
+	on_revoked = {
+		custom_tooltip = estate_dhimmi_guaranteed_autonomy_revoke_effect_tooltip
+		hidden_effect = {
+			clr_country_flag = dhimmi_tolerates_wrong_religion
+		}
+	}
+	on_revoked_province = {
+		if = {
+			limit = {
+				has_province_modifier = estate_dhimmi_guaranteed_autonomy_mod
+			}
+			remove_province_modifier = estate_dhimmi_guaranteed_autonomy_mod
+		}
+	}
+	on_invalid = {
+		custom_tooltip = estate_dhimmi_guaranteed_autonomy_revoke_effect_tooltip
+		hidden_effect = {
+			clr_country_flag = dhimmi_tolerates_wrong_religion
+		}
+	}
+	on_invalid_province = {
+		if = {
+			limit = {
+				has_province_modifier = estate_dhimmi_guaranteed_autonomy_mod
+			}
+			remove_province_modifier = estate_dhimmi_guaranteed_autonomy_mod
+		}
+	}
+	penalties = {
+	}
+	benefits = {
+	}
+	conditional_modifier = {
+		trigger = { has_government_attribute = free_guarantee_dhimmi_autonomy }
+		modifier = {
+			max_absolutism = 5
+			dhimmi_influence_modifier = -0.05
+		}
+	}
+	conditional_modifier = {
+		trigger = { has_government_mechanic = russian_modernization_mechanic }
+		modifier = { monthly_russian_modernization = -0.03 }
+	}
+	ai_will_do = {
+		factor = 1000
+		modifier = {
+			factor = 0
+			NOT = {
+				any_owned_province = {
+					NOT = { religion_group = ROOT }
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			is_subject = yes
+			overlord = {
+				religion = ROOT
+				has_idea_group = religious_ideas
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				has_global_modifier_value = {
+					which = tolerance_heathen 
+					value = 1
+				}
+			}
+		}
+	}
+}
+
+estate_dhimmi_dhimmi_education = {
+	icon = privilege_technology
+	loyalty = 0.0
+	influence = 0.05
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	is_valid = {
+		has_dlc = "Domination"
+	}
+	can_select = {
+		if = {
+			limit = { has_estate = estate_brahmins }
+			NOT = { has_estate_privilege = estate_brahmins_clerical_education }
+		}
+		if = {
+			limit = { has_estate = estate_church }
+			NOT = { has_estate_privilege = estate_church_clerical_education }
+		}
+		if = {
+			limit = { has_estate = estate_alchemists }
+			NOT = { has_estate_privilege = estate_alchemists_public_education }
+		}
+		if = {
+			limit = { has_estate = estate_industrialists }
+			NOT = { has_estate_privilege = estate_industrialists_technocrat_education }
+		}
+	}
+	on_granted = {
+		scaling_with_influence_privilege_tooltip = {
+			estate_privilege = estate_church_clerical_education
+		}
+	}
+	on_revoked = {
+		scaling_with_influence_privilege_tooltip = {
+			estate_privilege = estate_church_clerical_education
+		}
+	}
+	influence_scaled_conditional_modifier = {	#Modifier that are applied if the specified conditions are true. At 100% Influence you gain 100% of the modifier.
+		trigger = {
+			NOT = {
+				estate_loyalty = {
+					estate = estate_dhimmi
+					loyalty = 30
+				}
+			}
+		}
+		modifier = {
+			reform_progress_growth = -0.25
+		}
+	}
+	influence_scaled_conditional_modifier = {	#Modifier that are applied if the specified conditions are true. At 100% Influence you gain 100% of the modifier.
+		trigger = {
+			estate_loyalty = {
+				estate = estate_dhimmi
+				loyalty = 30
+			}
+			NOT = {
+				estate_loyalty = {
+					estate = estate_dhimmi
+					loyalty = 60
+				}
+			}
+		}
+		modifier = {
+			reform_progress_growth = 0.1
+		}
+	}
+	influence_scaled_conditional_modifier = {	#Modifier that are applied if the specified conditions are true. At 100% Influence you gain 100% of the modifier.
+		trigger = {
+			estate_loyalty = {
+				estate = estate_dhimmi
+				loyalty = 60
+			}
+		}
+		modifier = {
+			reform_progress_growth = 0.25
+		}
+	}
+	conditional_modifier = {
+		trigger = { has_government_mechanic = russian_modernization_mechanic }
+		modifier = { monthly_russian_modernization = -0.03 }
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+estate_brahmins_clerical_education = {
+	icon = privilege_ideas
+	loyalty = 0.05
+	influence = 0.05
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	is_valid = {
+		has_dlc = "Domination"
+	}
+	can_select = {
+		if = {
+			limit = { has_estate = estate_church }
+			NOT = { has_estate_privilege = estate_church_clerical_education }
+		}
+		if = {
+			limit = { has_estate = estate_dhimmi }
+			NOT = { has_estate_privilege = estate_dhimmi_dhimmi_education }
+		}
+		if = {
+			limit = { has_estate = estate_alchemists }
+			NOT = { has_estate_privilege = estate_alchemists_public_education }
+		}
+		if = {
+			limit = { has_estate = estate_industrialists }
+			NOT = { has_estate_privilege = estate_industrialists_technocrat_education }
+		}
+	}
+	on_granted = {
+		scaling_with_influence_privilege_tooltip = {
+			estate_privilege = estate_church_clerical_education
+		}
+	}
+	on_revoked = {
+		scaling_with_influence_privilege_tooltip = {
+			estate_privilege = estate_church_clerical_education
+		}
+	}
+	influence_scaled_conditional_modifier = {	#Modifier that are applied if the specified conditions are true. At 100% Influence you gain 100% of the modifier.
+		trigger = {
+			NOT = {
+				estate_loyalty = {
+					estate = estate_brahmins
+					loyalty = 30
+				}
+			}
+		}
+		modifier = {
+			reform_progress_growth = -0.25
+		}
+	}
+	influence_scaled_conditional_modifier = {	#Modifier that are applied if the specified conditions are true. At 100% Influence you gain 100% of the modifier.
+		trigger = {
+			estate_loyalty = {
+				estate = estate_brahmins
+				loyalty = 30
+			}
+			NOT = {
+				estate_loyalty = {
+					estate = estate_brahmins
+					loyalty = 60
+				}
+			}
+		}
+		modifier = {
+			reform_progress_growth = 0.1
+		}
+	}
+	influence_scaled_conditional_modifier = {	#Modifier that are applied if the specified conditions are true. At 100% Influence you gain 100% of the modifier.
+		trigger = {
+			estate_loyalty = {
+				estate = estate_brahmins
+				loyalty = 60
+			}
+		}
+		modifier = {
+			reform_progress_growth = 0.25
+		}
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 0
+			NOT = {
+				estate_loyalty = {
+					estate = estate_brahmins
+					loyalty = 30
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				estate_influence = {
+					estate = estate_brahmins
+					influence = 50
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			is_absolutism_active = yes
+		}
+	}
+}
+
+estate_jains_diplomacy = {
+	icon = privilege_diplo_power
+	land_share = 10
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = -0.05
+	is_valid = {
+		NOT = { has_estate = estate_burghers }
+	}
+	can_select = {
+		can_select_monarch_power_privilege = {
+			estate = estate_jains
+			type = dip
+		}
+		NOT = {
+			has_estate_privilege = estate_industrialists_land_of_potential
+		}
+	}
+	on_granted = {
+	}
+	penalties = {
+	}
+	benefits = {
+		country_diplomatic_power = 1
+	}
+	ai_will_do = {
+		factor = 100
+		modifier = {
+			factor = 0
+			OR = {
+				NOT = { crown_land_share = 30 }
+				estate_influence = {
+					estate = estate_jains
+					influence = 95
+				}
+			}
+			NOT = { has_estate_privilege = estate_jains_diplomacy }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 35 }
+				AND = {
+					is_absolutism_active = yes
+					NOT = { crown_land_share = 55 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_jains_diplomacy }
+		}
+		modifier = {
+			factor = 0.8
+			is_absolutism_active = yes
+		}
+		modifier = {
+			factor = 1.25
+			NOT = { dip = 2 }
+		}
+	}
+}

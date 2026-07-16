@@ -1,0 +1,313 @@
+########################################
+# Tripolitania Events     	           #
+########################################
+
+namespace = ia_flavor_z62
+
+# Salt Monopoly?
+country_event = {
+	id = ia_flavor_z62.1
+	title = ia_flavor_z62.1.t
+	desc = ia_flavor_z62.1.d
+	picture = TRADE_GOODS_FURS_FISH_AND_SALT_eventPicture
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+	major = yes
+	
+	option = {
+		name = ia_flavor_z62.1.a
+		
+		change_price = {
+			trade_goods = salt
+			key = imperial_monopoly_tt
+			value = 0.25
+			duration = -1
+		}
+	}
+	
+	option = {
+		name = ia_flavor_z62.1.b
+		
+		change_price = {
+			trade_goods = salt
+			key = saharan_salt_overflow_tt
+			value = -0.25
+			duration = -1
+		}
+		add_years_of_owned_provinces_production_income = {
+			years = 10
+			trigger = { trade_goods = salt }
+			custom_tooltip = 10_years_of_salt_tt
+		}
+	}
+}
+
+# Arrival of Dragon Princess
+country_event = {
+	id = ia_flavor_z62.2
+	title = ia_flavor_z62.2.t
+	desc = ia_flavor_z62.2.d
+	picture = COURT_eventPicture
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+	#major = yes
+	
+	option = {
+		name = ia_flavor_z62.2.a
+		
+		set_religious_school = {
+			group = christian
+			school = draconic_inquisition_school
+		}
+		set_country_flag = daohellenic_doctrines_picking_blocked
+		change_innovativeness = 5
+	}
+}
+
+# Experimental Weaponry Gamba
+country_event = {
+	id = ia_flavor_z62.3
+	title = ia_flavor_z62.3.t
+	desc = ia_flavor_z62.3.d
+	picture = ECONOMY_eventPicture
+
+	is_triggered_only = yes
+	hidden = yes
+	
+	option = {	# Good Military Outcome
+		name = ia_flavor_z62.3.a
+		ai_chance = { 
+			factor = 20 
+			modifier = {
+				factor = 1.2
+				has_country_flag = z62_better_experimental_outcomes_flag
+			}
+		}
+		country_event = { id = ia_flavor_z62.4 }
+	}
+	option = {	# Good Civilian Outcome
+		name = ia_flavor_z62.3.b
+		ai_chance = { 
+			factor = 20 
+			modifier = {
+				factor = 1.2
+				has_country_flag = z62_better_experimental_outcomes_flag
+			}
+		}
+		country_event = { id = ia_flavor_z62.5 }
+	}
+	option = { 	# Nothing Happens
+		name = ia_flavor_z62.3.c
+		ai_chance = { 
+			factor = 20
+		}
+		country_event = { id = ia_flavor_z62.6 }
+	}
+	option = {	# Bad Civilian Outcome
+		name = ia_flavor_z62.3.e
+		ai_chance = { 
+			factor = 20 
+			modifier = {
+				factor = 0.8
+				has_country_flag = z62_better_experimental_outcomes_flag
+			}
+		}
+		country_event = { id = ia_flavor_z62.7 }
+	}
+	option = {	# Bad Military Outcome
+		name = ia_flavor_z62.3.f
+		ai_chance = { 
+			factor = 20 
+			modifier = {
+				factor = 0.8
+				has_country_flag = z62_better_experimental_outcomes_flag
+			}
+		}
+		country_event = { id = ia_flavor_z62.8 }
+	}
+}
+
+# Good Military Outcome
+country_event = {
+	id = ia_flavor_z62.4
+	title = ia_flavor_z62.4.t
+	desc = ia_flavor_z62.4.d
+	picture = ECONOMY_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = ia_flavor_z62.4.a
+		
+		add_country_modifier = {
+			name = z62_good_military_experimental_outcome
+			duration = 1825
+		}
+	}
+}
+
+# Good Civilian Outcome
+country_event = {
+	id = ia_flavor_z62.5
+	title = ia_flavor_z62.5.t
+	desc = ia_flavor_z62.5.d
+	picture = ECONOMY_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = ia_flavor_z62.5.a
+		
+		add_country_modifier = {
+			name = z62_good_civilian_experimental_outcome
+			duration = 1825
+		}
+	}
+}
+
+# Nothing at all
+country_event = {
+	id = ia_flavor_z62.6
+	title = ia_flavor_z62.6.t
+	desc = ia_flavor_z62.6.d
+	picture = ECONOMY_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = ia_flavor_z62.6.a
+		
+		add_prestige = -10
+	}
+}
+
+# Bad Civilian Outcome
+country_event = {
+	id = ia_flavor_z62.7
+	title = ia_flavor_z62.7.t
+	desc = ia_flavor_z62.7.d
+	picture = ECONOMY_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = ia_flavor_z62.7.a
+		
+		add_country_modifier = {
+			name = z62_bad_civilian_experimental_outcome
+			duration = 1825
+		}
+	}
+}
+
+# Bad Military Outcome
+country_event = {
+	id = ia_flavor_z62.8
+	title = ia_flavor_z62.8.t
+	desc = ia_flavor_z62.8.d
+	picture = ECONOMY_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = ia_flavor_z62.8.a
+		
+		add_country_modifier = {
+			name = z62_bad_military_experimental_outcome
+			duration = 1825
+		}
+	}
+}
+
+# Minds Befuddled
+country_event = {
+	id = ia_flavor_z62.9
+	title = ia_flavor_z62.9.t
+	desc = ia_flavor_z62.9.d
+	picture = BANKRUPTCY_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = ia_flavor_z62.9.a
+		
+		add_country_modifier = {
+			name = z62_minds_befuddled
+			duration = 1825
+		}
+	}
+}
+
+# Minds Befuddled
+country_event = {
+	id = ia_flavor_z62.10
+	title = ia_flavor_z62.10.t
+	desc = ia_flavor_z62.10.d
+	picture = BANKRUPTCY_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = ia_flavor_z62.10.a
+		
+		add_country_modifier = {
+			name = z62_logistics_ruined
+			duration = 180
+		}
+	}
+}
+
+
+
+# Minds Befuddled
+country_event = {
+	id = ia_flavor_z62.11
+	title = ia_flavor_z62.11.t
+	desc = ia_flavor_z62.11.d
+	picture = LARGE_SHIPYARD_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = ia_flavor_z62.11.a
+		
+		add_country_modifier = {
+			name = z62_flying_ships
+			duration = -1
+		}
+		if = {
+			limit = {
+				capital_scope = { has_port = yes }
+			}
+			capital_scope = {
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+			}
+		}
+		else = {
+			random_owned_province = {
+				limit = { has_port = yes }
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+				voc_indiamen_light = ROOT
+			}
+		}
+	}
+}

@@ -1,0 +1,18 @@
+government = monarchy
+add_government_reform = mandala_reform
+government_rank = 1
+technology_group = indian
+religion = hinduism
+primary_culture = nepali
+capital = 557
+1444.11.11= {
+	monarch = {
+		name = "Jayajyotimalla"
+		dynasty = "Malla"
+        birth_date = 1420.10.22
+		ADM = 1
+		DIP = 2
+		MIL = 6
+	}
+    add_ruler_personality = martial_educator_personality
+}

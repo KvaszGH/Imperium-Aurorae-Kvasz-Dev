@@ -1,0 +1,335 @@
+country_decisions = {
+	ai_decision_desire_gibraltar = {
+		potential = {
+			ai = yes
+			OR = {
+				NOT = { 226 = { country_or_non_sovereign_subject_holds = ROOT } }
+				NOT = { 1751 = { country_or_non_sovereign_subject_holds = ROOT } }
+			}
+			OR = {
+				tag = VAL
+				226 = { country_or_non_sovereign_subject_holds = ROOT }
+				1751 = { country_or_non_sovereign_subject_holds = ROOT }
+			}
+		}
+		allow = {
+			owns = 226
+			owns = 1751
+		}
+		effect = {
+			# Literally Nothing, this is to make the AI desire controlling the goddamn strait
+		}
+		ai_will_do = {
+			factor = 1000
+		}
+		ai_importance = 1000
+	}
+	
+	templars_return_land_to_valencia = {
+		major = yes
+		potential = {
+			ai = yes
+			tag = TEM
+			any_owned_or_subject_province = {
+				region = iberia_region
+				NOT = { area = baleares_area }
+			}
+		}
+		
+		allow = {
+			is_at_war = no
+		}
+		
+		effect = {
+			every_owned_or_subject_province = {
+				limit = {
+					region = iberia_region
+					NOT = { area = baleares_area }
+				}
+				if = {
+					limit = { is_core = ROOT }
+					remove_core = ROOT
+					add_core = VAL
+				}
+				cede_province = VAL
+			}
+		}
+	}
+	valencia_return_land_to_templars = {
+		major = yes
+		potential = {
+			ai = yes
+			tag = VAL
+			any_owned_or_subject_province = {
+				area = baleares_area
+			}
+		}
+		
+		allow = {
+			is_at_war = no
+		}
+		
+		effect = {
+			every_owned_or_subject_province = {
+				limit = {
+					area = baleares_area
+				}
+				if = {
+					limit = { is_core = ROOT }
+					remove_core = ROOT
+					add_core = TEM
+				}
+				cede_province = TEM
+			}
+		}
+	}
+	establish_latin_empire_decision = {
+		major = yes
+		potential = {
+			religion = protestant
+			is_in_war = {
+				casus_belli = cb_final_crusade
+				attackers = ROOT
+			}
+			151 = {
+				owner = {
+					is_in_war = {
+						casus_belli = cb_final_crusade
+						defenders = THIS
+					}
+				}
+			}
+			NOT = { exists = LAE }
+		}
+		
+		allow = {
+			151 = { controlled_by = ROOT }
+		}
+		
+		effect = {
+			151 = { 
+				add_core = LAE
+				cede_province = ROOT 
+				set_in_empire = no
+			}
+			release = LAE
+			LAE = {
+				change_government = monarchy
+				change_religion = protestant
+				change_primary_culture = outremer
+				define_ruler = {
+					dynasty = ROOT
+				}
+				join_all_offensive_wars_of = ROOT
+				join_all_defensive_wars_of = ROOT
+				set_country_flag = crusader_state_flag
+			}
+			balkan_region = {
+				limit = { owner = { war_with = ROOT } }
+				add_core = LAE
+			}
+			create_march = LAE
+			
+			hidden_effect = {
+				LAE = {
+					country_event = {
+						id = ia_flavor_tem.26
+						days = 5
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	
+	establish_italy_decision = {
+		major = yes
+		potential = {
+			religion = protestant
+			is_in_war = {
+				casus_belli = cb_final_crusade
+				attackers = ROOT
+			}
+			118 = {
+				owner = {
+					is_in_war = {
+						casus_belli = cb_final_crusade
+						defenders = THIS
+					}
+				}
+			}
+			NOT = { exists = ITA }
+		}
+		
+		allow = {
+			118 = { controlled_by = ROOT }
+		}
+		
+		effect = {
+			118 = { 
+				add_core = ITA
+				cede_province = ROOT  
+				set_in_empire = no
+			}
+			release = ITA
+			ITA = {
+				change_government = monarchy
+				change_religion = protestant
+				change_primary_culture = italian
+				define_ruler = {
+					dynasty = ROOT
+				}
+				join_all_offensive_wars_of = ROOT
+				join_all_defensive_wars_of = ROOT
+				set_country_flag = crusader_state_flag
+			}
+			italy_region = {
+				limit = { owner = { war_with = ROOT } }
+				add_core = ITA
+			}
+			create_march = ITA
+			
+			hidden_effect = {
+				ITA = {
+					country_event = {
+						id = ia_flavor_tem.26
+						days = 5
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	establish_vandalia_decision = {
+		major = yes
+		potential = {
+			religion = protestant
+			is_in_war = {
+				casus_belli = cb_final_crusade
+				attackers = ROOT
+			}
+			341 = {
+				owner = {
+					is_in_war = {
+						casus_belli = cb_final_crusade
+						defenders = THIS
+					}
+				}
+			}
+			NOT = { exists = TUN }
+		}
+		
+		allow = {
+			341 = { controlled_by = ROOT }
+		}
+		
+		effect = {
+			341 = { 
+				add_core = TUN
+				cede_province = ROOT  
+				set_in_empire = no
+			}
+			release = TUN
+			TUN = {
+				change_government = monarchy
+				change_religion = protestant
+				change_primary_culture = vandal
+				define_ruler = {
+					dynasty = ROOT
+				}
+				join_all_offensive_wars_of = ROOT
+				join_all_defensive_wars_of = ROOT
+				set_country_flag = crusader_state_flag
+			}
+			tunisia_area = {
+				limit = { owner = { war_with = ROOT } }
+				add_core = TUN
+			}
+			create_march = TUN
+			
+			hidden_effect = {
+				TUN = {
+					country_event = {
+						id = ia_flavor_tem.26
+						days = 5
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	establish_milan_decision = {
+		major = yes
+		potential = {
+			religion = protestant
+			is_in_war = {
+				casus_belli = cb_final_crusade
+				attackers = ROOT
+			}
+			104 = {
+				owner = {
+					is_in_war = {
+						casus_belli = cb_final_crusade
+						defenders = THIS
+					}
+				}
+			}
+			NOT = { exists = MLO }
+		}
+		
+		allow = {
+			104 = { controlled_by = ROOT }
+		}
+		
+		effect = {
+			104 = { 
+				add_core = MLO
+				cede_province = ROOT  
+				set_in_empire = no
+			}
+			release = MLO
+			MLO = {
+				change_government = monarchy
+				change_religion = protestant
+				define_ruler = {
+					dynasty = ROOT
+				}
+				join_all_offensive_wars_of = ROOT
+				join_all_defensive_wars_of = ROOT
+				set_country_flag = crusader_state_flag
+			}
+			po_valley_area = {
+				limit = { owner = { war_with = ROOT } }
+				add_core = MLO
+			}
+			lombardy_area = {
+				limit = { owner = { war_with = ROOT } }
+				add_core = MLO
+			}
+			
+			create_march = MLO
+			
+			hidden_effect = {
+				MLO = {
+					country_event = {
+						id = ia_flavor_tem.26
+						days = 5
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+}

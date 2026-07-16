@@ -1,0 +1,21 @@
+government = republic
+add_government_reform = merchants_reform
+government_rank = 1
+technology_group = western
+religion = catholic
+primary_culture = lower_saxon
+capital = 45
+mercantilism = 25
+historical_friend = BRE
+historical_friend = HAM
+historical_friend = RIG
+historical_friend = BRA
+1444.11.11= {
+	monarch = {
+		name = "Hinrich Castorp"
+		adm = 2
+		dip = 5
+		mil = 2
+	}
+	add_ruler_personality = charismatic_negotiator_personality
+}

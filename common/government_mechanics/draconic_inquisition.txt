@@ -1,0 +1,207 @@
+draconic_inquisition_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 17
+	available = {
+		has_reform = palace_of_mirage_reform
+	}
+
+	powers = {
+		ia_secret_insights = {
+			gui = draconic_inquisition_gov_mech_frame
+			min = 0
+			max = 100
+			base_monthly_growth = 0.25
+			scaled_modifier = {
+				start_value = 0 
+				end_value = 100 
+				modifier = {
+					technology_cost = -0.1
+				}
+			}
+			is_good = yes
+		}	
+	}
+	
+	interactions = {
+		ia_shifting_sands = {
+			gui = draconic_inquisition_gov_mech_button
+			icon = GFX_draconic_inquisition_shifting_sands_button
+			trigger = {
+			}
+			cost_type = ia_secret_insights
+			cost = 60
+			effect = {
+				custom_tooltip = z62_all_desert_provinces_tt
+				tooltip = {
+					capital_scope = {
+						add_province_modifier = {
+							name = z62_shifting_sands
+							duration = 730
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = z62_improved_shifting_sands_flag
+					}
+					every_owned_province = {
+						limit = {
+							OR = {
+								has_terrain = desert
+								has_terrain = coastal_desert
+							}
+							has_fort_building_trigger = yes
+							controlled_by = ROOT
+						}
+						add_province_modifier = {
+							name = z62_shifting_sands_upgraded
+							duration = 730
+						}
+					}
+				}
+				hidden_effect = {
+					every_owned_province = {
+						limit = {
+							OR = {
+								has_terrain = desert
+								has_terrain = coastal_desert
+							}
+						}
+						add_province_modifier = {
+							name = z62_shifting_sands
+							duration = 730
+						}
+					}
+					#if = {
+					#	limit = { NOT = { has_country_flag = z62_counting_shifting_sands } }
+					#	set_variable = { which = Z62ShiftingSands value = 1 }
+					#	set_country_flag = z62_counting_shifting_sands
+					#}
+					#else = {
+					#	change_variable = {
+					#		which = Z62ShiftingSands
+					#		value = 1
+					#	}
+					#}
+					change_variable = {
+						which = ShiftingSands
+						value = 1
+					}
+				}
+			}
+			cooldown_years = 5
+			ai_chance = {
+				factor = 100
+				modifier = {
+					factor = 0
+					NOT = {
+						any_owned_province = {
+							has_siege = yes
+							OR = {
+								has_terrain = desert
+								has_terrain = coastal_desert
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		ia_prelude_to_doom = {
+			gui = draconic_inquisition_gov_mech_button
+			icon = GFX_draconic_inquisition_prelude_to_doom_button
+			trigger = {
+				at_war_with_religious_enemy = yes
+			}
+			cost_type = ia_secret_insights
+			cost = 60
+			effect = { 
+				add_country_modifier = {
+					name = z62_prelude_to_doom
+					duration = 180
+				}
+				if = {
+					limit = { has_country_flag = improved_prelude_of_doom_flag }
+					add_country_modifier = {
+						name = z62_prelude_to_doom_2
+						duration = 180
+					}
+				}
+				hidden_effect = {
+					#if = {
+					#	limit = { NOT = { has_country_flag = z62_counting_prelude_doom } }
+					#	set_variable = { which = Z62PreludeDoom value = 1 }
+					#	set_country_flag = z62_counting_prelude_doom
+					#}
+					#else = {
+					#	change_variable = {
+					#		which = Z62PreludeDoom
+					#		value = 1
+					#	}
+					#}
+					change_variable = {
+						which = PreludeDoom
+						value = 1
+					}
+				}
+			}
+			cooldown_years = 5
+			ai_chance = {
+				factor = 50
+				modifier = {
+					factor = 0
+					NOT = { is_at_war = yes }
+				}
+				modifier = {
+					factor = 0
+					war_score = 30
+				}
+			}
+		}
+		
+		ia_experimental_weaponry = {
+			gui = draconic_inquisition_gov_mech_button
+			icon = GFX_draconic_inquisition_experimental_weaponry_button	
+			trigger = {
+			}
+			cost_type = ia_secret_insights
+			cost = 60
+			effect = {
+				hidden_effect = {
+					country_event = { id = ia_flavor_z62.3 }
+					#if = {
+					#	limit = { NOT = { has_country_flag = z62_counting_experimental_weaponry } }
+					#	set_variable = { which = Z62ExperimentalWeaponry value = 1 }
+					#	set_country_flag = z62_counting_experimental_weaponry
+					#}
+					#else = {
+					#	change_variable = {
+					#		which = Z62ExperimentalWeaponry
+					#		value = 1
+					#	}
+					#}
+					change_variable = {
+						which = ExperimentalWeaponry
+						value = 1
+					}
+				}
+			}
+			cooldown_years = 5
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 0
+					is_at_war = yes
+				}
+				modifier = {
+					factor = 5
+					has_government_power = {
+						mechanic_type = draconic_inquisition_mechanic
+						power_type = ia_secret_insights
+						value = 90
+					}
+				}
+			}
+		}
+	}
+}

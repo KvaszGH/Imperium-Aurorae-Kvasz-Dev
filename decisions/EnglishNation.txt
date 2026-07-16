@@ -1,0 +1,196 @@
+country_decisions = {
+
+	english_nation_arthurian = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_england_flag }
+			NOT = { tag = ENG }
+			NOT = { tag = AVE }
+			NOT = { tag = HLR }
+			NOT = { tag = PAP }
+			NOT = { has_global_flag = destroyed_dumnonia_flag }
+			OR = {
+				primary_culture = welsh
+				primary_culture = cornish
+				primary_culture = breton
+			}
+			OR = {
+				government = monarchy
+				government = republic
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 242		# Gwynedd
+				province_id = 237		# Oxfordshire
+				province_id = 239		# Caerloyw
+				province_id = 233		# Kernow
+				province_id = 241		# Morgannwg
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			is_at_war = no
+			#is_free_or_tributary_trigger = yes
+			is_nomad = no
+			#OR = {
+			#	dynasty = "Pendraig"
+			#	tag = WLS
+			#	tag = CRN
+			#	government = republic
+			#}
+			NOT = { exists = ENG }
+			owns_core_province = 242		# Gwynedd
+			owns_core_province = 237		# Oxfordshire
+			owns_core_province = 239		# Caerloyw
+			owns_core_province = 233		# Kernow
+			owns_core_province = 241		# Morgannwg
+		}
+		effect = {
+			hidden_effect = { ia_save_historical_relations_effect = yes }
+			change_tag = ENG
+			on_change_tag_effect = yes
+			restore_country_name = yes
+			swap_non_generic_missions = yes
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 25
+			if = {
+				limit = {
+					NOT = { government = monarchy }
+					NOT = { government = republic }
+				}
+				change_government = monarchy
+			}
+			if = {
+				limit = { government = monarchy }
+				add_government_reform = dumnonia_monarchy_reform
+			}
+			else_if = {
+				limit = { government = republic }
+				add_government_reform = dumnonia_republic_reform
+			}
+			set_country_flag = formed_england_flag
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			set_capital = 239
+			239 = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+			hidden_effect = {
+				if = {
+					limit = { NOT = { has_country_flag = dum_counting_virtues } }
+					set_variable = { which = DumVirtues value = 0 }
+					set_country_flag = dum_counting_virtues
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	
+	albion_request_boon = {
+		major = yes
+		potential = {
+			has_country_flag = albion_in_court_flag
+			NOT = { has_country_modifier = sought_boon_from_albion }
+		}
+		allow = {
+			has_country_flag = albion_in_court_flag
+			NOT = { has_country_modifier = sought_boon_from_albion }
+		}
+		effect = {
+			if = {
+				limit = { ai = yes }
+				country_event = { id = gaeldom.22 }
+			}
+			else = {
+				country_event = { id = gaeldom.21 }
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	albion_activate_as_general = {
+		potential = {
+			has_country_flag = permanent_albion_general_flag
+			has_country_flag = albion_in_court_flag
+			NOT = { has_leader = "Albion" }
+		}
+		allow = {
+			has_country_flag = permanent_albion_general_flag
+			has_country_flag = albion_in_court_flag
+			NOT = { has_leader = "Albion" }
+		}
+		effect = {
+			define_general = {
+				shock = 8
+				fire = 4
+				manuever = 5
+				siege = 4
+				name = "Albion"
+				trait = grand_captain
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	eng_begin_sword_trial = {
+		major = yes
+		potential = {
+			OR = {
+				has_reform = dumnonia_monarchy_reform
+				has_reform = dumnonia_republic_reform
+			}
+			NOT = { has_country_flag = arthurian_trial_ongoing }
+			NOT = { has_ruler_modifier = failed_to_draw_excalibur }
+			NOT = { has_ruler_modifier = wielding_excalibur }
+		}
+		allow = {
+			OR = {
+				has_reform = dumnonia_monarchy_reform
+				has_reform = dumnonia_republic_reform
+			}
+			NOT = { has_regency = yes }
+			months_of_ruling = 3
+		}
+		effect = {
+			country_event = { id = ia_flavor_eng.14 }
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+}

@@ -1,0 +1,30 @@
+government = tribal
+add_government_reform = steppe_horde
+government_rank = 2
+technology_group = nomad_group
+religion = manichean
+primary_culture = mongol
+capital = 2357
+1444.10.10= {
+	monarch = {
+		name = "Qobolta"
+		dynasty = "Borjigin"
+		adm = 4
+		dip = 3
+		mil = 6
+		birth_date = 1424.10.12
+	}
+	add_ruler_personality = legendary_conqueror_personality
+}
+1444.11.10 = {
+	add_accepted_culture = cuman
+	add_country_modifier = {
+		name = cumania_revolter_mod
+		duration = 1825
+	}
+	declare_war_with_cb = {
+		who = Z00
+		casus_belli = cb_core
+		war_goal_province = 4692
+	}
+}

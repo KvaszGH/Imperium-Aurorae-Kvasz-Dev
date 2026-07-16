@@ -1,0 +1,38 @@
+spriteTypes = {
+    spriteType = {
+        name = "GFX_succession_bureaucracy_button"
+        texturefile = "gfx//interface//government_mechanics/byzantium/succession_bureaucracy_button.dds"
+        loadType = "INGAME"
+        transparencecheck = yes
+    }
+    spriteType = {
+        name = "GFX_succession_dynasty_button"
+        texturefile = "gfx//interface//government_mechanics/byzantium/succession_dynasty_button.dds"
+        loadType = "INGAME"
+        transparencecheck = yes
+    }
+    spriteType = {
+        name = "GFX_succession_army_button"
+        texturefile = "gfx//interface//government_mechanics/byzantium/succession_army_button.dds"
+        loadType = "INGAME"
+        transparencecheck = yes
+    }
+    spriteType = {
+        name = "GFX_draconic_inquisition_frame"
+        texturefile = "gfx//interface//government_mechanics/draconic_inquisition/draconic_inquisition_frame.dds"
+        loadType = "INGAME"
+        transparencecheck = yes
+    }
+    spriteType = {
+        name = "GFX_draconic_inquisition_shifting_sands_button"
+        texturefile = "gfx//interface//government_mechanics/draconic_inquisition/draconic_inquisition_shifting_sands_button.dds"
+    }
+    spriteType = {
+        name = "GFX_draconic_inquisition_prelude_to_doom_button"
+        texturefile = "gfx//interface//government_mechanics/draconic_inquisition/draconic_inquisition_prelude_to_doom_button.dds"
+    }
+    spriteType = {
+        name = "GFX_draconic_inquisition_experimental_weaponry_button"
+        texturefile = "gfx//interface//government_mechanics/draconic_inquisition/draconic_inquisition_experimental_weaponry_button.dds"
+    }
+}

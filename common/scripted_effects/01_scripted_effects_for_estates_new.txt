@@ -1,0 +1,95 @@
+add_estate_peasants_loyalty_effect = {
+	if = {
+		limit = {
+			has_estate = estate_peasants
+		}
+		add_estate_loyalty = {
+			estate = estate_peasants
+			loyalty = 10
+		}
+	}
+}
+reduce_estate_peasants_loyalty_effect = {
+	if = {
+		limit = {
+			has_estate = estate_peasants
+		}
+		add_estate_loyalty = {
+			estate = estate_peasants
+			loyalty = -10
+		}
+	}
+}
+add_estate_trade_company_loyalty_effect = {
+	if = {
+		limit = {
+			has_estate = estate_trade_company
+		}
+		add_estate_loyalty = {
+			estate = estate_trade_company
+			loyalty = 10
+		}
+	}
+}
+reduce_estate_trade_company_loyalty_effect = {
+	if = {
+		limit = {
+			has_estate = estate_trade_company
+		}
+		add_estate_loyalty = {
+			estate = estate_trade_company
+			loyalty = -10
+		}
+	}
+}
+
+#
+
+scaled_estate_peasants_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_peasants }
+}
+
+scaled_estate_peasants = {
+	scaled_estate_land_share_reduce_effect = { estate = estate_peasants }
+}
+
+scaled_estate_trade_company_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_trade_company }
+}
+
+scaled_estate_trade_company = {
+	scaled_estate_land_share_reduce_effect = { estate = estate_trade_company }
+}
+
+#
+
+on_completed_agenda_effect_estate_peasants = {}
+on_completed_agenda_effect_estate_trade_company = {}
+
+estate_action_DEMAND_WORKERS_INDUSTRIALISTS = {
+	add_country_modifier = {
+		name = industrialists_providing_workers_into_armed_forces
+		duration = 1825
+	}
+	add_estate_loyalty = {
+		estate = estate_industrialists
+		loyalty = -15
+	}
+}
+
+estate_action_RECRUIT_NATURAL_SCIENTIST_INDUSTRIALISTS = {
+	generate_estate_advisor = {
+		estate = estate_industrialists
+		type = natural_scientist
+	}
+	add_estate_influence_modifier = {
+		estate = estate_industrialists
+		desc = EST_VAL_INDUSTRIALISTS_SCIENTIST
+		influence = 10
+		duration = 10950
+	}
+	add_estate_loyalty = {
+		estate = estate_industrialists
+		loyalty = -10
+	}
+}
